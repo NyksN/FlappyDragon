@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Pipe
   - Ground
+  - ShieldIcon
+  - PointArea
+  - SpeedIcon
   layers:
   - Default
   - TransparentFX

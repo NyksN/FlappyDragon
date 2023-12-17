@@ -5,6 +5,7 @@ using UnityEngine;
 public class PipeSpawner : MonoBehaviour
 {
     public float maxSecond = 1.5f;
+
     public float heightRnage = 0.5f,timer;
     public GameObject[] pipes;
     int randomInt;
@@ -17,7 +18,7 @@ public class PipeSpawner : MonoBehaviour
     
     void Update()
     {
-        maxSecond = Random.Range(2.4f, 3.2f);
+        maxSecond = Random.Range(SpeedScript.pipeSpeedmin, SpeedScript.pipeSpeedmax);
         if (timer >maxSecond)
         {
             PipeSpawn();

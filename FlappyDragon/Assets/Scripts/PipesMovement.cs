@@ -5,11 +5,11 @@ using UnityEngine;
 public class PipesMovement : MonoBehaviour
 {
 
-    public float speed;
+    public static float speed;
      
     void Start()
     {
-        
+        speed = 1.5f;
     }
 
     
