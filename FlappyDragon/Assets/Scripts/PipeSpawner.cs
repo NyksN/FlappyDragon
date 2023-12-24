@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class PipeSpawner : MonoBehaviour
 {
-    public float maxSecond = 1.5f;
+    static public float maxSecond;
 
-    public float heightRnage = 0.5f,timer;
+    public float heightRnage = 0.63f, timer;
     public GameObject[] pipes;
     int randomInt;
     void Start()
     {
         PipeSpawn();
-        
+        maxSecond = 1.5f;
     }
 
-    
+
     void Update()
     {
         maxSecond = Random.Range(SpeedScript.pipeSpeedmin, SpeedScript.pipeSpeedmax);
-        if (timer >maxSecond)
+        if (timer > maxSecond)
         {
             PipeSpawn();
             timer = 0;
@@ -32,7 +32,7 @@ public class PipeSpawner : MonoBehaviour
     private void PipeSpawn()
     {
         Vector3 spawnPos = transform.position + new Vector3(0, Random.Range(-heightRnage, +heightRnage));
-        GameObject pipe = Instantiate(pipes[randomInt] ,spawnPos, Quaternion.identity);
+        GameObject pipe = Instantiate(pipes[randomInt], spawnPos, Quaternion.identity);
 
         Destroy(pipe, 8f);
     }

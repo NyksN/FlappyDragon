@@ -6,13 +6,17 @@ public class ShieldScript : MonoBehaviour
 {
 
     public GameObject shield;
+    public AudioSource shieldSound;
     public static bool isShieldActive;
+    public static float waitSeconds;
 
     void Start()
     {
+        waitSeconds = 7;
         shield.SetActive(false);
         isShieldActive = false;
-        StartCoroutine(closeShield());
+        PlayerPrefs.SetInt("5+Goted", 0);
+        PlayerPrefs.SetInt("2xGoted", 0);
     }
 
     // Update is called once per frame
@@ -24,15 +28,19 @@ public class ShieldScript : MonoBehaviour
             isShieldActive = false;
             CollisionDetector.touched = false;
         }
-        
+        if (Scene0PanelScript.canUse5)
+        {
+            waitSeconds += 5;
+            Scene0PanelScript.canUse5 = false;
+        }
+
     }
 
     IEnumerator closeShield()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(waitSeconds);
         shield.SetActive(false);
-        isShieldActive = false;
-        Debug.Log("Kapandi");
+        ButtonScripts.canDie = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,11 +49,15 @@ public class ShieldScript : MonoBehaviour
         if ((collision.gameObject.CompareTag("ShieldIcon")) && (!isShieldActive) && (!SpeedScript.isSpeedActive))
         {
             shield.SetActive(true);
+            
+            shieldSound.Play();
             isShieldActive = true;
             StartCoroutine(closeShield());
             collision.gameObject.SetActive(false);
-            Debug.Log("Açýldý");
+
 
         }
     }
+
+    
 }
